@@ -1,5 +1,5 @@
 # Assignment 4 - Add Implicit Intents and HTTP data loading to Beverage app.
-
+## Due 12-12-2016
 ## Author
 
 
@@ -17,7 +17,7 @@ When clicking the Send Email button, the app should take the email address of th
 
 In addition to adding the Implicit Intents to select a contact and send an email, the app must now load it's data from a remote web service vs. loading it from the CSV file.
 
-The exact same data can be pulled by making a HTTP request to the following URL. If you would like to see what gets returned, you can can simply type the following URL into a web brower and see what gets returned.
+The exact same data can be pulled by making a HTTP request to the following URL. If you would like to see what gets returned, you can simply type the following URL into a web browser and see what gets returned.
 
 http://barnesbrothers.homeserver.com/beverageapi
 
@@ -43,7 +43,7 @@ Solution Requirements:
 
 Optional Extra Credit:
 
-* Use SQLite database in place of CSV / Web Service
+* Use an SQLite database as the data source for the application
 * Pre-load SQLite database with data from Web Service
 
 ### Notes
@@ -60,11 +60,27 @@ You will also need to add permission to the manifest to allow access to the Inte
 
 You will probably need to add an email account and a contact to your virtual device in order to test this functionality.
 
+## Grading
+| Feature                           | Points |
+|-----------------------------------|--------|
+| Looks Like Pictures               | 5      |
+| Select Contact                    | 15     |
+| Send Email                        | 15     |
+| Enable / Disable                  | 10     |
+| Email to Contact                  | 15     |
+| Email From/Subject/Body           | 10     |
+| Pull JSON                         | 10     |
+| Parse JSON                        | 10     |
+| Documentation                     | 5      |
+| README                            | 5      |
+| Extra Credit                      | 20     |
+| Total                             | 100    |
+
 ### Extra Credit
 
 For an extra 20 points of assignment extra credit you can do the following:
 
-Setup a SQLite database to maintain the information for the Beverages. When the database is initally setup, the database should pre-populate it's data by accessing the HTTP web URL mentioned above. There are 2 changes here. The collection of data used to 'run' the application will pull from the database and NOT the web service. The database will initally pull from the web service when it is being setup for the first time, and then never use the web service again. (Unless the app is uninstalled and reinstalled).
+Setup a SQLite database to maintain the information for the Beverages. When the database is initially setup, the database should pre-populate it's data by accessing the HTTP web URL mentioned above. There are 2 changes here. The collection of data used to 'run' the application will pull from the database and NOT the web service. The database will initially pull from the web service when it is being setup for the first time, and then never use the web service again. (Unless the app is uninstalled and reinstalled).
 
 The application must do all of the above work to get the extra credit. In order to satisfy the web service grading part of the assignment, the application must either load the Beverage data from the web service when the application starts up (no database), or load the Beverage data when the database is created (with database). If there is no web service functionality for one of those two features, then you can not get any points for that section of grading.
 
@@ -88,6 +104,7 @@ The App should look like the screen shots I have provided.
 There is no need to save any information changed in the application to the CSV file.
 
 The properties of the CSV file are as follows:
+
 1. Item Number
 2. Item Description
 3. Item Pack Size
@@ -98,7 +115,7 @@ Solution Requirements:
 
 * Master layout (You can use the same layout for both Portrait and Landscape unless you feel the need to make one for each)
 * Detail layout (You can use the same layout for both Portrait and Landscape unless you feel the need to make one for each)
-* Fragments for all of the layouts (Expect ViewPager. That one is a little different.)
+* Fragments for all of the layouts (Except ViewPager. That one is a little different.)
 * Ability to click on a list item and start a new Activity that displays the details of the list item.
 * Updating information in the detail view should be reflected in the list view when returning to the list.
 * Class to represent a Beverage Item (POJO)
@@ -114,7 +131,8 @@ Solution Requirements:
 
 ### Notes
 
-The book does not cover how to read in a CSV file. We will do something in class to demonstrate how to get the CSV read in.
+The book does not cover how to read in a CSV file. We will try/plan to do something in class to demonstrate how to get the CSV read in.
+You should also do your own research into how to read in a csv file in android
 The location of the file to be read in is in the following paths:
 Inside Android Studio: app/res/raw/
 Through File System:   app/src/main/res/raw/
