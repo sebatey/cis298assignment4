@@ -1,8 +1,15 @@
 package edu.kvcc.cis298.cis298assignment4;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+
+import java.util.List;
 
 //Class extnds from the singleFragmentActivity we created
 public class BeverageActivity extends SingleFragmentActivity {
@@ -23,4 +30,5 @@ public class BeverageActivity extends SingleFragmentActivity {
         String beverageId = getIntent().getStringExtra(EXTRA_BEVERAGE_ID);
         return BeverageFragment.newInstance(beverageId);
     }
+
 }

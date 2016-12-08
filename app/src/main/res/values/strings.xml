@@ -15,4 +15,7 @@
     <string name="beverage_pack_hint">Item Pack</string>
     <string name="beverage_price_hint">Item Price</string>
 
+    <string name="select_contact_button">Select Contact</string>
+    <string name="send_email_button">Send Email</string>
+
 </resources>
