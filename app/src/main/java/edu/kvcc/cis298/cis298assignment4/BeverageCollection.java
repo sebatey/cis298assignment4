@@ -1,8 +1,11 @@
 package edu.kvcc.cis298.cis298assignment4;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Network;
 import android.util.Log;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +15,8 @@ import java.util.Scanner;
  * This is a singleton that will store the data for our application
  */
 public class BeverageCollection {
+
+    private static final String TAG = "BEVERAGE_COLLECTION";
 
     //Static variable that represents this class
     private static BeverageCollection sBeverageCollection;
@@ -39,13 +44,22 @@ public class BeverageCollection {
         mBeverages = new ArrayList<>();
         //Set the context to the one that is passed in
         mContext = context;
+
         //Call the private method to load the beverage list
-        loadBeverageList();
+        //loadBeverageList();
+    }
+
+    public void addBeverage(Beverage b){
+        mBeverages.add(b);
     }
 
     //Getters
     public List<Beverage> getBeverages() {
         return mBeverages;
+    }
+
+    public void setBeverages(List<Beverage> beverages){
+        mBeverages = beverages;
     }
 
     public Beverage getBeverage(String Id) {

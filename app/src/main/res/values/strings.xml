@@ -9,6 +9,7 @@
     <string name="beverage_pack">Pack:</string>
     <string name="beverage_price">Price:</string>
     <string name="beverage_active">Active:</string>
+    <string name="subtitle_format">%1$s Beverages</string>
 
     <string name="beverage_id_hint">Item Id</string>
     <string name="beverage_name_hint">Item Name</string>

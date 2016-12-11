@@ -3,7 +3,6 @@ package edu.kvcc.cis298.cis298assignment4;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,9 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,10 +23,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by David Barnes on 11/3/2015.
@@ -202,45 +195,9 @@ public class BeverageFragment extends Fragment {
     }
 
     public void selectContact() {
-
-        //Begin by checking if the application has permission to access Contacts
-        int hasReadContactPermission = getActivity().checkSelfPermission(Manifest.permission.READ_CONTACTS);
-
-        //If the application does not have permission to access Contacts as the user to grant
-        //permission to access Contacts
-        if (hasReadContactPermission != PackageManager.PERMISSION_GRANTED) {
-
-            //Tell the user that the application needs permission to access Contacts
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.READ_CONTACTS)) {
-                showMessageOKCancel("You need to allow access to Contacts",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                requestPermissions(new String[]{Manifest.permission.READ_CONTACTS},
-                                        REQUEST_CODE);
-                            }
-                        });
-                return;
-            }
-
-            //Request permission
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_CODE);
-            return;
-        }
-
         //Begin the implicit intent to select a contact to retrieve the email address from
         Intent i = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
         startActivityForResult(Intent.createChooser(i, "Select Contact"), REQUEST_CODE);
-    }
-
-    //Show dialog box to inform the user that the application needs permission to access Contacts
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
     }
 
     public void sendEmail(){

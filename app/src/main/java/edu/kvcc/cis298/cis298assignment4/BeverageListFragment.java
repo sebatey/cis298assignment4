@@ -1,11 +1,14 @@
 package edu.kvcc.cis298.cis298assignment4;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +22,28 @@ import java.util.List;
  */
 public class BeverageListFragment extends Fragment {
 
+    private static final String TAG = "BEVERAGE_LIST_FRAGMENT";
+
     //Private variables for the recycler view and the required adapter
     private RecyclerView mBeverageRecyclerView;
     private BeverageAdapter mBeverageAdapter;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState){
+        Log.i(TAG, "On Create Started");
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
+        new FetchBeverageTask().execute();
+        Log.i(TAG, "On Create Finished");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "On create view started");
         //Use the inflator to create a new view
         View view = inflater.inflate(R.layout.fragment_beverage_list, container, false);
 
@@ -38,6 +56,7 @@ public class BeverageListFragment extends Fragment {
         //Call the updateUI method to do any remaining setup and get the view displayed
         updateUI();
 
+        Log.i(TAG, "On create view finished");
         //return the view
         return view;
     }
@@ -52,6 +71,7 @@ public class BeverageListFragment extends Fragment {
     //Method to setup the view with an adapter if it doesn't already have one.
     //and update changes if it does.
     private void updateUI() {
+        Log.i(TAG, "Update UI started");
         //Get the collection of data.
         BeverageCollection beverageCollection = BeverageCollection.get(getActivity());
         //Fetch the list of data from the collection
@@ -66,6 +86,7 @@ public class BeverageListFragment extends Fragment {
             //adapter already exists, so just call the notify data set changed method to update
             mBeverageAdapter.notifyDataSetChanged();
         }
+        Log.i(TAG,"Update UI finished");
     }
 
     //Private class that is required to get a recyclerview working
@@ -149,6 +170,28 @@ public class BeverageListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mBeverages.size();
+        }
+    }
+
+    private void setupAdapter(){
+        if(isAdded()){
+            BeverageCollection collection = BeverageCollection.get(getActivity());
+            mBeverageAdapter = new BeverageAdapter(collection.getBeverages());
+            mBeverageRecyclerView.setAdapter(mBeverageAdapter);
+        }
+    }
+
+    private class FetchBeverageTask extends AsyncTask<Void, Void, List<Beverage>>{
+        @Override
+        protected List<Beverage> doInBackground(Void... params){
+            return new BeverageFetcher().fetchBeverages();
+        }
+
+        @Override
+        protected void onPostExecute(List<Beverage> beverages){
+            BeverageCollection collection = BeverageCollection.get(getActivity());
+            collection.setBeverages(beverages);
+            setupAdapter();
         }
     }
 }
