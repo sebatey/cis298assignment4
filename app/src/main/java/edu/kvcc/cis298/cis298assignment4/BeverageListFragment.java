@@ -184,7 +184,7 @@ public class BeverageListFragment extends Fragment {
     private class FetchBeverageTask extends AsyncTask<Void, Void, List<Beverage>>{
         @Override
         protected List<Beverage> doInBackground(Void... params){
-            return new BeverageFetcher().fetchBeverages();
+            return new BeverageFetcher(getContext()).fetchBeverages();
         }
 
         @Override

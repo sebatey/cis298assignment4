@@ -277,7 +277,7 @@ public class BeverageFragment extends Fragment {
                                 e.getStackTrace());
                     } finally {
                         //Always close the cursor
-                        c.close();
+                        //c.close();
                         Log.v("CONTACT_DEBUG_TAG","Cursor c closed");
                     }
                     break;
