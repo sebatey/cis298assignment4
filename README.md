@@ -1,6 +1,6 @@
 # Assignment 4 - Add Implicit Intents and HTTP data loading to Beverage app.
 ## Due 12-12-2016
-## Author
+## Scott Batey
 
 
 
@@ -86,11 +86,18 @@ The application must do all of the above work to get the extra credit. In order 
 
 ## Outside Resources Used
 
-
+Developer.Android.com
+StackOverflow.com
 
 ## Known Problems, Issues, And/Or Errors in the Program
+There are three problems with the program. 
 
+The first problem is that the application launch seems to timeout the first time, while it waits for the database to be created. After the database is finished being created the application no longer fails to launch.
 
+The second problem is that the application stopped requesting permission to read contacts after the database portion was added to the application. If the user goes to application  manager and gives the app permission to read contacts it no longer fails to select a contact.
+Oddly enough, this feature worked just fine before the addition of the database.
+
+The third and final problem is that the buttons don't automatically enable/disable
 
 # Original Assignment README
 

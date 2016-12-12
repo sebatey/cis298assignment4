@@ -32,40 +32,46 @@ public class BeverageActivity extends SingleFragmentActivity {
     //Overridden method originally defined in the singleFragmentActivity to create the fragment that will get hosted
     @Override
     protected Fragment createFragment() {
-        requestPermissions();
+        requestContactsPermission();
+        requestInternetPermission();
         String beverageId = getIntent().getStringExtra(EXTRA_BEVERAGE_ID);
         return BeverageFragment.newInstance(beverageId);
     }
 
-    public void requestPermissions(){
-        Log.i(TAG, "Request Permission started");
-        //Begin by checking if the application has permission to access Contacts
-        int hasInternetPermission = this.checkSelfPermission(Manifest.permission.INTERNET);
-        int hasReadContactPermission = this.checkSelfPermission(Manifest.permission.READ_CONTACTS);
+    public void requestInternetPermission(){
+            Log.i(TAG, "Request Permission started");
+            //Begin by checking if the application has permission to access Contacts
+            int hasInternetPermission = this.checkSelfPermission(Manifest.permission.INTERNET);
 
-        //If the application does not have permission to access Contacts as the user to grant
-        //permission to access Contacts
-        //If the application does not have permission to access Contacts as the user to grant
-        //permission to access Contacts
-        if (hasInternetPermission != PackageManager.PERMISSION_GRANTED) {
+            //If the application does not have permission to access Contacts as the user to grant
+            //permission to access Contacts
+            //If the application does not have permission to access Contacts as the user to grant
+            //permission to access Contacts
+            if (hasInternetPermission != PackageManager.PERMISSION_GRANTED) {
 
-            //Tell the user that the application needs permission to access Contacts
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.INTERNET)) {
-                showMessageOKCancel("You need to allow access to Internet",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                requestPermissions(new String[]{Manifest.permission.INTERNET},
-                                        REQUEST_CODE);
-                            }
-                        });
+                //Tell the user that the application needs permission to access Contacts
+                if (!shouldShowRequestPermissionRationale(Manifest.permission.INTERNET)) {
+                    showMessageOKCancel("You need to allow access to Internet",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    requestPermissions(new String[]{Manifest.permission.INTERNET},
+                                            REQUEST_CODE);
+                                }
+                            });
+                    return;
+                }
+
+                //Request permission
+                requestPermissions(new String[]{Manifest.permission.INTERNET}, REQUEST_CODE);
                 return;
             }
+    }
 
-            //Request permission
-            requestPermissions(new String[]{Manifest.permission.INTERNET}, REQUEST_CODE);
-            return;
-        }
+    public void requestContactsPermission(){
+        Log.i(TAG, "Request Permission started");
+        //Begin by checking if the application has permission to access Contacts
+        int hasReadContactPermission = this.checkSelfPermission(Manifest.permission.READ_CONTACTS);
 
         //If the application does not have permission to access Contacts as the user to grant
         //permission to access Contacts
